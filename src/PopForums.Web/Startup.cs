@@ -12,6 +12,9 @@ using PopForums.Extensions;
 using PopForums.Mvc.Areas.Forums.Authorization;
 using PopForums.Mvc.Areas.Forums.Extensions;
 using PopForums.Sql;
+using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Diagnostics;
 
 namespace PopForums.Web
 {
@@ -80,8 +83,20 @@ namespace PopForums.Web
 
 		public void Configure(IApplicationBuilder app, ILoggerFactory loggerFactory)
 		{
+
+			loggerFactory.AddFile("Logs/mylog-{Date}.txt");
 			// Records exceptions and info to the POP Forums database.
 			loggerFactory.AddPopForumsLogger(app);
+
+			app.UseExceptionHandler(a => a.Run(async context =>
+			{
+				var exceptionHandlerPathFeature = context.Features.Get<IExceptionHandlerPathFeature>();
+				var exception = exceptionHandlerPathFeature.Error;
+
+				var result = JsonConvert.SerializeObject(new { error = exception.Message });
+				context.Response.ContentType = "application/json";
+				await context.Response.WriteAsync(result);
+			}));
 
 			// Enables languages
 			app.UsePopForumsCultures();

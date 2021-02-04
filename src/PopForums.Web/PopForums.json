@@ -1,7 +1,7 @@
 ﻿{
   "PopForums": {
     "Database": {
-      "ConnectionString": "server=localhost;Database=popforums17;Trusted_Connection=True;"
+      "ConnectionString": "server=198.38.83.200;Initial Catalog=antongen_forums;User ID=antongen_forums;Password=1Baalia1"
     },
     "Cache": {
       "Seconds": 180,
@@ -14,6 +14,21 @@
     },
     "Queue": {
       "ConnectionString": "UseDevelopmentStorage=true"
+    },
+    "SendGridOptions": {
+      "SendGridUser": "Anton.genis1", /*Ag06086^^*/
+      "SendGridKey": "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",
+      "FromFullName": "AsqGuru Support",
+      "FromEmail": "support@asqguru.com"
+    },
+    "SmtpOptions": {
+      "smtpUserName": "---fill with your smtp username--",
+      "smtpPassword": "---fill with your smtp password--",
+      "smtpHost": "smtp.gmail.com",
+      "smtpPort": 587,
+      "smtpSSL": true,
+      "fromEmail": "---your from email-------------------",
+      "fromFullName": "---your from full name------------"
     },
     "LogTopicViews": true,
     "ReCaptcha": {
